@@ -36,7 +36,26 @@ public class IFormatInstruction extends Instruction
         }
         else
         {
+            String[] registersOrConstants = words[1].split(",");
+            for (int i = 0; i < registersOrConstants.length; i++)
+                registersOrConstants[i] = registersOrConstants[i].trim();
             
+            String secondSourceRegister = registerNameToBinaryMap.get(registersOrConstants[0]);
+
+            int indexOfOpeningBracket =registersOrConstants[1].indexOf("(");
+            int indexOfClosingBracket =registersOrConstants[1].indexOf(")");
+
+            String offset = registersOrConstants[1].substring(0, indexOfOpeningBracket);
+            String firstSourceRegister = registerNameToBinaryMap.get(registersOrConstants[1].substring(indexOfOpeningBracket+1, indexOfClosingBracket));
+
+            offset = Integer.toBinaryString(Integer.parseInt(registersOrConstants[2]));
+            if(offset.length() < 16)
+            {
+                offset = ("000000000000000").substring(offset.length())+offset;
+            }
+
+            String fileName = "op.txt";
+            String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + offset + "\n";
         }
     }
 
