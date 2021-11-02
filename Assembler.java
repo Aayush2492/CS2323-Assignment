@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Assembler {   
     public static void main(String[] args) 
     {
-        HashMap<String, Instruction> mapOfRFormatInstructions = new HashMap<>();
+        HashMap<String, Instruction> instructionNameToBinaryMap = new HashMap<>();
         Scanner sc;
         try
         {
@@ -18,7 +18,24 @@ public class Assembler {
                 String line = sc.nextLine();
                 String[] words = line.split(" ");
                 Instruction instr = new RFormatInstruction(words[0], words[1], words[2]);
-                mapOfRFormatInstructions.put(words[0], instr);
+                instructionNameToBinaryMap.put(words[0], instr);
+            }      
+        } 
+        catch (FileNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
+
+        try
+        {
+            sc = new Scanner(new File("./data/i_format_instructions.txt"));
+
+            while(sc.hasNextLine()) 
+            {
+                String line = sc.nextLine();
+                String[] words = line.split(" ");
+                Instruction instr = new IFormatInstruction(words[0], words[1]);
+                instructionNameToBinaryMap.put(words[0], instr);
             }      
         } 
         catch (FileNotFoundException e) 
@@ -54,14 +71,10 @@ public class Assembler {
                 String[] words = line.split(" ");
 
                 String instructionName = words[0];
-                String[] registersOrConstants = words[1].split(",");
-                for (int i = 0; i < registersOrConstants.length; i++)
-                    registersOrConstants[i] = registersOrConstants[i].trim();
-
-                Instruction instr = mapOfRFormatInstructions.get(instructionName);
-                System.out.println(instr.getOpcode());
-                System.out.println(Arrays.toString(registersOrConstants));
-                instr.getMachineCode(registersOrConstants, registerNameToBinaryMap);
+                Instruction instr = instructionNameToBinaryMap.get(instructionName);
+                // System.out.println(instr.getOpcode());
+                // System.out.println(Arrays.toString(registersOrConstants));
+                instr.getMachineCode(line, registerNameToBinaryMap);
             }      
         } 
         catch (FileNotFoundException e) 

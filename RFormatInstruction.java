@@ -15,8 +15,13 @@ public class RFormatInstruction extends Instruction {
         return(this.funct);
     }
 
-    void getMachineCode(String[] registersOrConstants, HashMap<String, String> registerNameToBinaryMap)
+    void getMachineCode(String line, HashMap<String, String> registerNameToBinaryMap)
     {
+        String[] words = line.split(" ");
+        String[] registersOrConstants = words[1].split(",");
+        for (int i = 0; i < registersOrConstants.length; i++)
+            registersOrConstants[i] = registersOrConstants[i].trim();
+
         //Shift amount will be zero except for sll and srl
         if(this.instructionName.equals("sll") || this.instructionName.equals("srl"))
         {

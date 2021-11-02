@@ -14,5 +14,5 @@ public abstract class Instruction {
         return(this.opcode);
     }
 
-    abstract void getMachineCode(String[] registersOrConstants, HashMap<String,String> registerNameToBinaryMap);
+    abstract void getMachineCode(String registersOrConstants, HashMap<String,String> registerNameToBinaryMap);
 }
