@@ -8,6 +8,7 @@ JC = javac
 
 CLASSES = \
 		  Assembler.java \
+		  Deassembler.java \
 		  Instruction.java \
 		  RFormatInstruction.java \
 		  IFormatInstruction.java \
@@ -20,5 +21,8 @@ classes: $(CLASSES:.java=.class)
 clean:
 	$(RM) *.class
 	
-run:
+assemble:
 	java Assembler
+
+deassemble:
+	java Deassembler
