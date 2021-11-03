@@ -19,5 +19,5 @@ public abstract class Instruction {
         return this.instructionName;
     }
 
-    abstract void getMachineCode(String registersOrConstants, HashMap<String,String> registerNameToBinaryMap);
+    abstract String getMachineCode(String registersOrConstants, HashMap<String,String> registerNameToBinaryMap);
 }

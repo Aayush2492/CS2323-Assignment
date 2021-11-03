@@ -1,6 +1,3 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 
 public class RFormatInstruction extends Instruction {
@@ -15,7 +12,7 @@ public class RFormatInstruction extends Instruction {
         return(this.funct);
     }
 
-    void getMachineCode(String line, HashMap<String, String> registerNameToBinaryMap)
+    String getMachineCode(String line, HashMap<String, String> registerNameToBinaryMap)
     {
         String[] words = line.split(" ");
         String[] registersOrConstants = words[1].split(",");
@@ -35,9 +32,8 @@ public class RFormatInstruction extends Instruction {
                 shamt = ("00000").substring(shamt.length())+shamt;
             }
             
-            String fileName = "op.txt";
             String correspondingMachineCode = this.opcode + "00000" + secondSourceRegister + destinationRegister + shamt + this.funct;
-            writeToFile(fileName, correspondingMachineCode);
+            return(correspondingMachineCode);
         }
         else
         {
@@ -45,25 +41,8 @@ public class RFormatInstruction extends Instruction {
             String firstSourceRegister = registerNameToBinaryMap.get(registersOrConstants[1]);
             String secondSourceRegister = registerNameToBinaryMap.get(registersOrConstants[2]);
 
-            String fileName = "op.txt";
             String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + destinationRegister + "00000" + this.funct;
-            writeToFile(fileName, correspondingMachineCode);
-        }
-    }
-
-    private void writeToFile(String fileName, String textToBeAppended)
-    {
-        try 
-        {
-            BufferedWriter out = new BufferedWriter(
-                new FileWriter(fileName, true));
-
-            out.write(textToBeAppended + "\n");
-            out.close();
-        }
-        catch (IOException e) 
-        {
-            System.out.println("exception occured" + e);
+            return(correspondingMachineCode);
         }
     }
 

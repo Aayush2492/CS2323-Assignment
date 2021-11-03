@@ -1,6 +1,3 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 
 public class IFormatInstruction extends Instruction 
@@ -10,7 +7,7 @@ public class IFormatInstruction extends Instruction
         super(_instructionName, _opcode);
     }
 
-    public void getMachineCode(String line, HashMap<String, String> registerNameToBinaryMap)
+    public String getMachineCode(String line, HashMap<String, String> registerNameToBinaryMap)
     {
         String[] words = line.split(" ");
 
@@ -27,12 +24,11 @@ public class IFormatInstruction extends Instruction
             String immediateValueOrOffset = Integer.toBinaryString(Integer.parseInt(registersOrConstants[2]));
             if(immediateValueOrOffset.length() < 16)
             {
-                immediateValueOrOffset = ("000000000000000").substring(immediateValueOrOffset.length())+immediateValueOrOffset;
+                immediateValueOrOffset = ("0000000000000000").substring(immediateValueOrOffset.length())+immediateValueOrOffset;
             }
 
-            String fileName = "op.txt";
             String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + immediateValueOrOffset + "\n";
-            writeToFile(fileName, correspondingMachineCode);
+            return(correspondingMachineCode);
         }
         else
         {
@@ -54,24 +50,8 @@ public class IFormatInstruction extends Instruction
                 offset = ("000000000000000").substring(offset.length())+offset;
             }
 
-            String fileName = "op.txt";
             String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + offset + "\n";
-        }
-    }
-
-    private void writeToFile(String fileName, String textToBeAppended)
-    {
-        try 
-        {
-            BufferedWriter out = new BufferedWriter(
-                new FileWriter(fileName, true));
-
-            out.write(textToBeAppended + "\n");
-            out.close();
-        }
-        catch (IOException e) 
-        {
-            System.out.println("exception occured" + e);
+            return(correspondingMachineCode);
         }
     }
 }

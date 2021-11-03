@@ -10,6 +10,10 @@ public class Deassembler
 {
     public static void main(String[] args) 
     {
+        String number = "1";
+        String inputBinaryFilePath = "./sample_data/test_deassembler/bin_files/prog"+number+"bin.txt";
+        String outputAssemblyFilePath = "./sample_data/test_deassembler/bin_to_asm/prog"+number+"asm.txt";
+
         HashMap<String, Instruction> instructionNameToBinaryMap = new HashMap<>();
         Scanner sc;
         try
@@ -63,10 +67,9 @@ public class Deassembler
             e.printStackTrace();
         }
 
-        String filePath = "bin.txt";
         try
         {
-            sc = new Scanner(new File(filePath));
+            sc = new Scanner(new File(inputBinaryFilePath));
 
             while(sc.hasNextLine()) 
             {
@@ -123,7 +126,7 @@ public class Deassembler
                     }
                 }
 
-                writeToFile("op_asm.txt", correspondingAssemblyCode);
+                writeToFile(outputAssemblyFilePath, correspondingAssemblyCode);
             }      
         } 
         catch (FileNotFoundException e) 
