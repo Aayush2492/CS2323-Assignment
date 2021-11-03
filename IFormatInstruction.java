@@ -37,7 +37,6 @@ public class IFormatInstruction extends Instruction
                 registersOrConstants[i] = registersOrConstants[i].trim();
             
             String secondSourceRegister = registerNameToBinaryMap.get(registersOrConstants[0]);
-            System.out.println(registersOrConstants[1]);
 
             int indexOfOpeningBracket =registersOrConstants[1].indexOf("(");
             int indexOfClosingBracket =registersOrConstants[1].indexOf(")");

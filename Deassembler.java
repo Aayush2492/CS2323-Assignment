@@ -167,8 +167,7 @@ public class Deassembler
     {
         try 
         {
-            BufferedWriter out = new BufferedWriter(
-                new FileWriter(fileName, true));
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName, true));
 
             out.write(textToBeAppended + "\n");
             out.close();

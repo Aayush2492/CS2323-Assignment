@@ -8,12 +8,13 @@ import java.util.Scanner;
 
 public class Assembler 
 {
-    
     public static void main(String[] args) 
     {
-        String number = "1";
+        String number = args[0];
+        System.out.println(args[0]);
         String inputAssemblyFilePath = "./sample_data/test_assembler/asm_files/prog"+number+".asm";
-        String outputBinaryFilePath = "./sample_data/test_assembler/asm_to_bin/prog"+number+"bin.txt";
+        // String outputBinaryFilePath = "./sample_data/test_assembler/asm_to_bin/prog"+number+"bin.txt";
+        String outputBinaryFilePath = "./sample_data/test_assembler/asm_to_bin_hex_files/prog"+number+"bin_hex.txt";
 
         HashMap<String, Instruction> instructionNameToBinaryMap = new HashMap<>();
         Scanner sc;
@@ -112,10 +113,12 @@ public class Assembler
     {
         try 
         {
-            BufferedWriter out = new BufferedWriter(
-                new FileWriter(fileName, true));
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName, true));
 
-            out.write(textToBeAppended + "\n");
+            long decimal = Long.parseLong(textToBeAppended, 2);
+            String hexaform = Long.toString(decimal, 16);
+            
+            out.write(textToBeAppended +": "+ hexaform + "\n");
             out.close();
         }
         catch (IOException e) 
