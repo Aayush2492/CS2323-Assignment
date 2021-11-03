@@ -30,6 +30,20 @@ public class IFormatInstruction extends Instruction
             String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + immediateValueOrOffset;
             return(correspondingMachineCode);
         }
+        else if(this.instructionName.equals("lui"))
+        {
+            String[] registersOrConstants = words[1].split(",");
+            String secondSourceRegister = registerNameToBinaryMap.get(registersOrConstants[0]);
+
+            String immediateValue = Integer.toBinaryString(Integer.parseInt(registersOrConstants[1]));
+            if(immediateValue.length() < 16)
+            {
+                immediateValue = ("0000000000000000").substring(immediateValue.length())+immediateValue;
+            }
+
+            String correspondingMachineCode = this.opcode + "00000" + secondSourceRegister + immediateValue;
+            return(correspondingMachineCode);
+        }
         else
         {
             String[] registersOrConstants = words[1].split(",");

@@ -10,7 +10,7 @@ public class Deassembler
 {
     public static void main(String[] args) 
     {
-        String number = "5";
+        String number = args[0];
         String inputBinaryFilePath = "./sample_data/test_deassembler/bin_files/prog"+number+"bin.txt";
         String outputAssemblyFilePath = "./sample_data/test_deassembler/bin_to_asm/prog"+number+"asm.txt";
 
@@ -142,6 +142,12 @@ public class Deassembler
                     {
                         int target = Integer.parseInt(line.substring(6, 32), 2);
                         correspondingAssemblyCode = instructionName + " " + Integer.toString(target);
+                    }
+                    else if(instructionName.equals("lui"))
+                    {
+                        String secondSourceRegister = registerNameToBinaryMap.get(line.substring(11, 16));
+                        int immediateValue = Integer.parseInt(line.substring(16, 32), 2);
+                        correspondingAssemblyCode = instructionName + " " + secondSourceRegister + "," + Integer.toString(immediateValue);
                     }
                     else
                     {
