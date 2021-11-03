@@ -14,7 +14,7 @@ public class Deassembler
         String inputBinaryFilePath = "./sample_data/test_deassembler/bin_files/prog"+number+"bin.txt";
         String outputAssemblyFilePath = "./sample_data/test_deassembler/bin_to_asm/prog"+number+"asm.txt";
 
-        HashMap<String, Instruction> instructionNameToBinaryMap = new HashMap<>();
+        HashMap<String, Instruction> functToBinaryMap = new HashMap<>();
         Scanner sc;
         try
         {
@@ -25,7 +25,7 @@ public class Deassembler
                 String line = sc.nextLine();
                 String[] words = line.split(" ");
                 Instruction instr = new RFormatInstruction(words[0], words[1], words[2]);
-                instructionNameToBinaryMap.put(words[2], instr);
+                functToBinaryMap.put(words[2], instr);
             }      
         } 
         catch (FileNotFoundException e) 
@@ -33,6 +33,7 @@ public class Deassembler
             e.printStackTrace();
         }
 
+        HashMap<String, Instruction> opcodeToBinaryMap = new HashMap<>();
         try
         {
             sc = new Scanner(new File("./data/i_format_instructions.txt"));
@@ -42,7 +43,7 @@ public class Deassembler
                 String line = sc.nextLine();
                 String[] words = line.split(" ");
                 Instruction instr = new IFormatInstruction(words[0], words[1]);
-                instructionNameToBinaryMap.put(words[1], instr);
+                opcodeToBinaryMap.put(words[1], instr);
             }      
         } 
         catch (FileNotFoundException e) 
@@ -80,7 +81,7 @@ public class Deassembler
                 {
                     // R format instruction
                     String funct = line.substring(line.length()-6, line.length());
-                    Instruction correspondingInstruction = instructionNameToBinaryMap.get(funct);
+                    Instruction correspondingInstruction = functToBinaryMap.get(funct);
 
                     String instructionName = correspondingInstruction.getName();
 
@@ -90,7 +91,7 @@ public class Deassembler
                         String destinationRegister = registerNameToBinaryMap.get(line.substring(16, 21));     
                         int shamt = Integer.parseInt(line.substring(21, 26), 2);
 
-                        correspondingAssemblyCode = instructionName + " " + destinationRegister + "," + secondSourceRegister + "," + Integer.toString(shamt) + "\n";
+                        correspondingAssemblyCode = instructionName + " " + destinationRegister + "," + secondSourceRegister + "," + Integer.toString(shamt);
                     }
                     else
                     {
@@ -98,13 +99,13 @@ public class Deassembler
                         String destinationRegister = registerNameToBinaryMap.get(line.substring(16, 21));    
                         String firstSourceRegister = registerNameToBinaryMap.get(line.substring(6, 11));    
 
-                        correspondingAssemblyCode = instructionName + " " + destinationRegister + "," + firstSourceRegister + "," + secondSourceRegister + "\n";
+                        correspondingAssemblyCode = instructionName + " " + destinationRegister + "," + firstSourceRegister + "," + secondSourceRegister;
                     }
 
                 }
                 else
                 {
-                    Instruction correspondingInstruction = instructionNameToBinaryMap.get(firstFiveBits);
+                    Instruction correspondingInstruction = opcodeToBinaryMap.get(firstFiveBits);
 
                     String instructionName = correspondingInstruction.getName();
                     if(instructionName.equals("addi") || instructionName.equals("andi") || instructionName.equals("ori") || instructionName.equals("beq") ||
@@ -114,7 +115,7 @@ public class Deassembler
                         int immediateValue = Integer.parseInt(line.substring(16, 32), 2);    
                         String firstSourceRegister = registerNameToBinaryMap.get(line.substring(6, 11)); 
 
-                        correspondingAssemblyCode = instructionName + " " + secondSourceRegister + "," + firstSourceRegister + "," + Integer.toString(immediateValue)+ "\n";
+                        correspondingAssemblyCode = instructionName + " " + secondSourceRegister + "," + firstSourceRegister + "," + Integer.toString(immediateValue);
                     }
                     else
                     {
@@ -122,7 +123,7 @@ public class Deassembler
                         int immediateValue = Integer.parseInt(line.substring(16, 32), 2);    
                         String firstSourceRegister = registerNameToBinaryMap.get(line.substring(6, 11));
 
-                        correspondingAssemblyCode = instructionName + " " + secondSourceRegister + "," + Integer.toString(immediateValue) + "(" + firstSourceRegister + ")" + "\n";
+                        correspondingAssemblyCode = instructionName + " " + secondSourceRegister + "," + Integer.toString(immediateValue) + "(" + firstSourceRegister + ")";
                     }
                 }
 
