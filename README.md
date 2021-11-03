@@ -1,11 +1,10 @@
 # Assignment 2- CS2323
 
-### About `input.txt`:
+`sample_data/test_assembler/asm_files` contains the asm files which cover all the instructions in the table 2.1. On running the assembler you will get the binary and hex codes of each instruction in `sample_data/test_assembler/asm_to_bin_hex_files`
 
-<ol>
-    <li>Make sure the words you want are separated(delimited) by ':' except at the end.</li>
-    <li>Make sure there is no newline character or whitespace at the beginning or end.</li>
-</ol>
+`sample_data/test_deassembler/bin_files` contains the binary bits which we got from previous folder. On running the deassembler you will get the asm format of each instruction in `sample_data/test_deassembler/bin_to_asm`
+
+Verify that content of `sample_data/test_assembler/asm_files` and `sample_data/test_deassembler/bin_to_asm` match.
 
 ### Execution
 
