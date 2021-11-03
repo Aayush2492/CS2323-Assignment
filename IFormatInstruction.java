@@ -27,7 +27,7 @@ public class IFormatInstruction extends Instruction
                 immediateValueOrOffset = ("0000000000000000").substring(immediateValueOrOffset.length())+immediateValueOrOffset;
             }
 
-            String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + immediateValueOrOffset + "\n";
+            String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + immediateValueOrOffset;
             return(correspondingMachineCode);
         }
         else
@@ -50,7 +50,7 @@ public class IFormatInstruction extends Instruction
                 offset = ("000000000000000").substring(offset.length())+offset;
             }
 
-            String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + offset + "\n";
+            String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + offset;
             return(correspondingMachineCode);
         }
     }
