@@ -7,6 +7,14 @@ public class JFormatInstruction extends Instruction {
 
     public String getMachineCode(String line, HashMap<String, String> registerNameToBinaryMap)
     {
-        return("");
+        String target = line.substring(6, 32);
+        target = Integer.toBinaryString(Integer.parseInt(target));
+        if(target.length() < 26)
+        {
+            target = ("00000000000000000000000000").substring(target.length())+target;
+        }
+
+        String corresspondingMachineCode = this.opcode + target;
+        return(corresspondingMachineCode);
     }
 }

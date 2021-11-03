@@ -35,6 +35,11 @@ public class RFormatInstruction extends Instruction {
             String correspondingMachineCode = this.opcode + "00000" + secondSourceRegister + destinationRegister + shamt + this.funct;
             return(correspondingMachineCode);
         }
+        else if(this.instructionName.equals("jr"))
+        {
+            String correspondingMachineCode = this.opcode + "11111" + "00000" + "00000"	+ "00000" + this.funct;
+            return(correspondingMachineCode);
+        }
         else
         {
             String destinationRegister = registerNameToBinaryMap.get(registersOrConstants[0]);

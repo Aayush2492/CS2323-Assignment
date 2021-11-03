@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Assembler {
+public class Assembler 
+{
     
     public static void main(String[] args) 
     {
@@ -42,6 +43,23 @@ public class Assembler {
                 String line = sc.nextLine();
                 String[] words = line.split(" ");
                 Instruction instr = new IFormatInstruction(words[0], words[1]);
+                instructionNameToBinaryMap.put(words[0], instr);
+            }      
+        } 
+        catch (FileNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
+
+        try
+        {
+            sc = new Scanner(new File("./data/j_format_instructions.txt"));
+
+            while(sc.hasNextLine()) 
+            {
+                String line = sc.nextLine();
+                String[] words = line.split(" ");
+                Instruction instr = new JFormatInstruction(words[0], words[1]);
                 instructionNameToBinaryMap.put(words[0], instr);
             }      
         } 
