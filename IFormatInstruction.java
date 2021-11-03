@@ -37,6 +37,7 @@ public class IFormatInstruction extends Instruction
                 registersOrConstants[i] = registersOrConstants[i].trim();
             
             String secondSourceRegister = registerNameToBinaryMap.get(registersOrConstants[0]);
+            System.out.println(registersOrConstants[1]);
 
             int indexOfOpeningBracket =registersOrConstants[1].indexOf("(");
             int indexOfClosingBracket =registersOrConstants[1].indexOf(")");
@@ -44,10 +45,10 @@ public class IFormatInstruction extends Instruction
             String offset = registersOrConstants[1].substring(0, indexOfOpeningBracket);
             String firstSourceRegister = registerNameToBinaryMap.get(registersOrConstants[1].substring(indexOfOpeningBracket+1, indexOfClosingBracket));
 
-            offset = Integer.toBinaryString(Integer.parseInt(registersOrConstants[2]));
+            offset = Integer.toBinaryString(Integer.parseInt(offset));
             if(offset.length() < 16)
             {
-                offset = ("000000000000000").substring(offset.length())+offset;
+                offset = ("0000000000000000").substring(offset.length())+offset;
             }
 
             String correspondingMachineCode = this.opcode + firstSourceRegister + secondSourceRegister + offset;
