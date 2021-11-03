@@ -93,6 +93,10 @@ public class Deassembler
 
                         correspondingAssemblyCode = instructionName + " " + destinationRegister + "," + secondSourceRegister + "," + Integer.toString(shamt);
                     }
+                    else if(instructionName.equals("jr"))
+                    {
+                        correspondingAssemblyCode="jr $ra";
+                    }
                     else
                     {
                         String secondSourceRegister = registerNameToBinaryMap.get(line.substring(11, 16));
@@ -116,6 +120,11 @@ public class Deassembler
                         String firstSourceRegister = registerNameToBinaryMap.get(line.substring(6, 11)); 
 
                         correspondingAssemblyCode = instructionName + " " + secondSourceRegister + "," + firstSourceRegister + "," + Integer.toString(immediateValue);
+                    }
+                    else if(instructionName.equals("j") || instructionName.equals("jal"))
+                    {
+                        int target = Integer.parseInt(line.substring(6, 32), 2);
+                        correspondingAssemblyCode = instructionName + " " + Integer.toString(target);
                     }
                     else
                     {
