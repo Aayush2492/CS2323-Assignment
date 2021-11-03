@@ -10,7 +10,7 @@ public class Deassembler
 {
     public static void main(String[] args) 
     {
-        String number = "1";
+        String number = "5";
         String inputBinaryFilePath = "./sample_data/test_deassembler/bin_files/prog"+number+"bin.txt";
         String outputAssemblyFilePath = "./sample_data/test_deassembler/bin_to_asm/prog"+number+"asm.txt";
 
@@ -43,6 +43,23 @@ public class Deassembler
                 String line = sc.nextLine();
                 String[] words = line.split(" ");
                 Instruction instr = new IFormatInstruction(words[0], words[1]);
+                opcodeToBinaryMap.put(words[1], instr);
+            }      
+        } 
+        catch (FileNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
+
+        try
+        {
+            sc = new Scanner(new File("./data/j_format_instructions.txt"));
+
+            while(sc.hasNextLine()) 
+            {
+                String line = sc.nextLine();
+                String[] words = line.split(" ");
+                Instruction instr = new JFormatInstruction(words[0], words[1]);
                 opcodeToBinaryMap.put(words[1], instr);
             }      
         } 

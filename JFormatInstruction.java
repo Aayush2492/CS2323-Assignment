@@ -5,9 +5,15 @@ public class JFormatInstruction extends Instruction {
         super(_instructionName, _opcode);
     }
 
+    public String getName()
+    {
+        return(this.instructionName) ;
+    }
+
     public String getMachineCode(String line, HashMap<String, String> registerNameToBinaryMap)
     {
-        String target = line.substring(6, 32);
+        String[] words = line.split(" ");
+        String target = words[1];
         target = Integer.toBinaryString(Integer.parseInt(target));
         if(target.length() < 26)
         {
