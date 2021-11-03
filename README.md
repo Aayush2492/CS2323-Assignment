@@ -1,4 +1,4 @@
-# Assignment 2- CS2323
+# Assignment 1- CS2323
 
 `sample_data/test_assembler/asm_files` contains the asm files which cover all the instructions in the table 2.1. On running the assembler you will get the binary and hex codes of each instruction in `sample_data/test_assembler/asm_to_bin_hex_files`
 
@@ -6,21 +6,25 @@
 
 Verify that content of `sample_data/test_assembler/asm_files` and `sample_data/test_deassembler/bin_to_asm` match.
 
+### Requirements
+
+Make sure the java compiler and SDK are installed.
+
 ### Execution
 
-Run the code using the following command in the terminal:
+Compile the code using the following command in the terminal:
 
 ```
 make
 ```
 
-Execute the assembler java file using
+Then execute the assembler java file using,
 
 ```
 make assemble
 ```
 
-Execute the deassembler java file using
+and then execute the deassembler java file using,
 
 ```
 make deassemble
@@ -28,7 +32,7 @@ make deassemble
 
 ### Clean
 
-To delete the \*.class file, run:
+To delete the \*.class files, run:
 
 ```
 make clean

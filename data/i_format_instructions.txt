@@ -13,5 +13,6 @@ sh 101001
 lb 100000
 lbu 100100
 sb 101000
-ll placeholder
-sc placeholder
+ll 111111
+sc 101010
+lui 001111

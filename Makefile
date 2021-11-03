@@ -15,6 +15,7 @@ CLASSES = \
 		  JFormatInstruction.java \
 
 default: classes
+	rm -rf sample_data/test_assembler/asm_to_bin_hex_files/prog{1..5}bin_hex.txt && rm -rf sample_data/test_deassembler/bin_to_asm/prog{1..5}asm.txt
 
 classes: $(CLASSES:.java=.class)
 
@@ -30,4 +31,4 @@ assemble:
 	java Assembler 1 && java Assembler 2 && java Assembler 3 && java Assembler 4 && java Assembler 5
 
 deassemble:
-	java Deassembler
+	java Deassembler 1 && java Deassembler 2 && java Deassembler 3 && java Deassembler 4 && java Deassembler 5
