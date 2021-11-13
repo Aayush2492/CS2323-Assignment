@@ -19,9 +19,6 @@ default: classes
 
 classes: $(CLASSES:.java=.class)
 
-clean:
-	$(RM) *.class
-	
 #assemble:
 #	for number in 1 2 3 4 5 ; do \
 #    	java Assembler $$number ; \
@@ -32,3 +29,6 @@ assemble:
 
 deassemble:
 	java Deassembler 1 && java Deassembler 2 && java Deassembler 3 && java Deassembler 4 && java Deassembler 5
+
+clean:
+	$(RM) *.class && rm -rf sample_data/test_assembler/asm_to_bin_hex_files/prog{1..5}bin_hex.txt && rm -rf sample_data/test_deassembler/bin_to_asm/prog{1..5}asm.txt

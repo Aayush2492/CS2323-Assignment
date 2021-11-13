@@ -11,7 +11,6 @@ public class Assembler
     public static void main(String[] args) 
     {
         String number = args[0];
-        System.out.println(args[0]);
         String inputAssemblyFilePath = "./sample_data/test_assembler/asm_files/prog"+number+".asm";
         String outputBinaryFilePath = "./sample_data/test_assembler/asm_to_bin_hex_files/prog"+number+"bin_hex.txt";
 
@@ -96,10 +95,13 @@ public class Assembler
 
                 String instructionName = words[0];
                 Instruction instr = instructionNameToBinaryMap.get(instructionName);
-                // System.out.println(instr.getOpcode());
-                // System.out.println(Arrays.toString(registersOrConstants));
                 String correspondingMachineCode = instr.getMachineCode(line, registerNameToBinaryMap);
-                writeToFile(outputBinaryFilePath, correspondingMachineCode);
+
+                long decimal = Long.parseLong(correspondingMachineCode, 2);
+                String hexaform = Long.toString(decimal, 16);
+
+                String textToBeAppended = correspondingMachineCode + " (" + hexaform + ", " + line + ")";
+                writeToFile(outputBinaryFilePath, textToBeAppended);
             }      
         } 
         catch (FileNotFoundException e) 
@@ -113,13 +115,7 @@ public class Assembler
         try 
         {
             BufferedWriter out = new BufferedWriter(new FileWriter(fileName, true));
-
-            //out.write(textToBeAppended + "\n");
-
-            long decimal = Long.parseLong(textToBeAppended, 2);
-            String hexaform = Long.toString(decimal, 16);
-            out.write(textToBeAppended +": "+ hexaform + "\n");
-            
+            out.write(textToBeAppended + "\n");
             out.close();
         }
         catch (IOException e) 
