@@ -46,4 +46,4 @@ make clean
 
 ### Explaination of code design
 
-All instructions are divided into three categories and therefore three classess are made which inherit the instruction class. Abstract method is used for the conversion of mips to machine code (`getMachineCode()`) so that while calling the abstract method, the callee doesn't need to know which type the instruction belongs to.
+All instructions are divided into three categories and therefore three classess are made which inherit the instruction class. Abstract method is used for the conversion of mips to machine code (`getMachineCode()`) so that while calling the abstract method, the caller doesn't need to know which type the instruction belongs to.
