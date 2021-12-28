@@ -1,4 +1,4 @@
-# Assignment 1- CS2323
+# Assignment 1- CS2323- Converting Assembly to Binary files and vice versa.
 
 `sample_data/test_assembler/asm_files` contains the asm files which cover all the instructions in the table 2.1. On running the assembler you will get the binary and hex codes of each instruction in `sample_data/test_assembler/asm_to_bin_hex_files`
 
